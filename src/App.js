@@ -1,8 +1,13 @@
 import React from 'react';
+import Container from './Components/Container';
 import './App.css';
 
 function App() {
-  return <h1>Hello Map App!</h1>;
+  return (
+    <Container>
+      <h1>Hello Map App!</h1>
+    </Container>
+  );
 }
 
 export default App;
