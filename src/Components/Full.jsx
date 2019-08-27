@@ -13,7 +13,7 @@ function Full({ children, center }) {
   });
 
   return (
-    <div className={fullClass}>
+    <div data-testid='full' className={fullClass}>
       <div className='col'></div>
       <div className='col-auto'>{children}</div>
       <div className='col'></div>

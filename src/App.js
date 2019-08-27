@@ -9,26 +9,28 @@ import './App.css';
 
 function App() {
   return (
-    <Container>
-      <Full center>
-        <div>
-          <h1>Hello Map App!</h1>
+    <div data-testid='app'>
+      <Container>
+        <Full center>
           <div>
-            <h3>Hello Map App!</h3>
+            <h1>Trip Planner!</h1>
+            <div>
+              <h3>Hello Map App!</h3>
+            </div>
           </div>
-        </div>
-      </Full>
-      <Full>
-        <div>
-          <h1>Hello Map App!</h1>
-        </div>
-      </Full>
-      <Full center>
-        <div>
-          <h1>Hello Map App!</h1>
-        </div>
-      </Full>
-    </Container>
+        </Full>
+        <Full>
+          <div>
+            <h1>Hello Map App!</h1>
+          </div>
+        </Full>
+        <Full center>
+          <div>
+            <h1>Hello Map App!</h1>
+          </div>
+        </Full>
+      </Container>
+    </div>
   );
 }
 
