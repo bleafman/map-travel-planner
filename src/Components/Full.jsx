@@ -3,12 +3,11 @@ import classNames from 'classnames';
 
 /**
  * Compositional wrapper to give a "full" row width to contents.
- * @param center will apply justify-content-center and d-flex.
+ * @param center will apply justify-content-center
  */
 function Full({ children, center }) {
   const fullClass = classNames({
     row: true,
-    dflex: center,
     'justify-content-center': center
   });
 
