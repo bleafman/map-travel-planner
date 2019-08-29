@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 
+import MarkerPin from './MarkerPin';
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -21,11 +23,15 @@ class Map extends React.Component {
     this.setState({ loading: false });
   }
 
-  handleClick = ({ lngLat: [longitude, latitude] }) => {
+  addMarker = ({ lngLat: [longitude, latitude] }) => {
     this.setState(state => {
       const { markers } = state;
       return { markers: [...markers, { longitude, latitude }] };
     });
+  };
+
+  removeMarkers = () => {
+    this.setState({ markers: [] });
   };
 
   render() {
@@ -40,15 +46,18 @@ class Map extends React.Component {
               this.setState({ viewport });
             }
           }}
-          onClick={this.handleClick}
+          onClick={this.addMarker}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         >
           {markers.map((m, i) => (
             <Marker {...m} key={i}>
-              You clicked here
+              <MarkerPin />
             </Marker>
           ))}
         </ReactMapGL>
+        <button className='btn btn-secondary m-2' onClick={this.removeMarkers}>
+          Remove Markers
+        </button>
       </div>
     );
   }
