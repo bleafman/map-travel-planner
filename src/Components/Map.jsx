@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 
 class Map extends React.Component {
   constructor(props) {
@@ -8,11 +8,12 @@ class Map extends React.Component {
       viewport: {
         width: 400,
         height: 400,
-        latitude: 37.7577,
-        longitude: -122.4376,
+        longitude: -74.1,
+        latitude: 40.7128,
         zoom: 8
       },
-      loading: true
+      loading: true,
+      markers: []
     };
   }
 
@@ -20,8 +21,15 @@ class Map extends React.Component {
     this.setState({ loading: false });
   }
 
+  handleClick = ({ lngLat: [longitude, latitude] }) => {
+    this.setState(state => {
+      const { markers } = state;
+      return { markers: [...markers, { longitude, latitude }] };
+    });
+  };
+
   render() {
-    const { viewport, loading } = this.state;
+    const { viewport, loading, markers } = this.state;
 
     return (
       <div data-testid='map'>
@@ -32,8 +40,15 @@ class Map extends React.Component {
               this.setState({ viewport });
             }
           }}
+          onClick={this.handleClick}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        />
+        >
+          {markers.map((m, i) => (
+            <Marker {...m} key={i}>
+              You clicked here
+            </Marker>
+          ))}
+        </ReactMapGL>
       </div>
     );
   }
