@@ -3,6 +3,7 @@ import React from 'react';
 // Custom Components
 import Container from './Components/Container';
 import Full from './Components/Full';
+import Map from './Components/Map';
 
 // Styling
 import './App.css';
@@ -13,12 +14,13 @@ function App() {
       <Container>
         <Full center>
           <h1>Welcome to the Interactive Travel Planner</h1>
-          <p>A map-based for travel itinerary planning</p>
+          <p>A map-based travel itinerary</p>
         </Full>
         <Full>
-          <div>
-            <h2>Map</h2>
-          </div>
+          <h2>Map</h2>
+        </Full>
+        <Full center>
+          <Map />
         </Full>
       </Container>
     </div>
