@@ -27,6 +27,7 @@ function MarkerPin(props) {
         transform: `translate(${-size / 2}px,${-size}px)`
       }}
       onClick={onClick}
+      data-testid='marker-pin'
     >
       <path d={ICON} />
     </svg>
