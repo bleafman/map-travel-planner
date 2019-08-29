@@ -19,9 +19,6 @@ function App() {
           <p>A map-based travel planner</p>
         </Full>
         <Full>
-          <h3>Map</h3>
-        </Full>
-        <Full>
           <Map />
         </Full>
       </Container>
