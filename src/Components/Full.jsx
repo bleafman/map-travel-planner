@@ -8,7 +8,8 @@ import classNames from 'classnames';
 function Full({ children, center }) {
   const fullClass = classNames({
     row: true,
-    'justify-content-center': center
+    'justify-content-center': center,
+    'd-flex': center
   });
 
   return (
