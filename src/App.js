@@ -13,13 +13,15 @@ function App() {
     <div data-testid='app'>
       <Container>
         <Full center>
-          <h1>Welcome to the Interactive Travel Planner</h1>
-          <p>A map-based travel itinerary</p>
+          <Full>
+            <h1>Mapper</h1>
+          </Full>
+          <p>A map-based travel planner</p>
         </Full>
         <Full>
-          <h2>Map</h2>
+          <h3>Map</h3>
         </Full>
-        <Full center>
+        <Full>
           <Map />
         </Full>
       </Container>

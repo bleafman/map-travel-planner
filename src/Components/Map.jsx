@@ -1,5 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
+import '../styles/Map.css';
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoiYnJhbmRvbmxlYWZtYW4iLCJhIjoiY2p6dmZ4cWJ2MGJ6eDNjcWpidjg5ZWVwYiJ9.4_teWfx-ceYn-FRdlpgQug';
@@ -8,9 +9,9 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: 5,
-      lat: 34,
-      zoom: 1.5
+      lng: 6.8,
+      lat: 46,
+      zoom: 2.5
     };
   }
 
@@ -40,13 +41,10 @@ class Map extends React.Component {
 
     return (
       <div data-testid='map'>
-        <div className='inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold'>
-          <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
-        </div>
-        <div
-          ref={el => (this.mapContainer = el)}
-          className='absolute top right left bottom'
-        />
+        <div className='bg-dark text-light text-center rounded-lg'>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+        <div className='m-1' />
+        <div id='map' ref={el => (this.mapContainer = el)} />
+        <div className='m-3' />
       </div>
     );
   }
