@@ -2,15 +2,8 @@ import React from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 
 import MarkerPin from './MarkerPin';
+
 import LineOverlay from './LineOverlay';
-
-import ScatterplotOverlay from './ScatterplotOverlay';
-
-const CITY_LOCATIONS = [
-  [-122.39851786165565, 37.78736425435588],
-  [-122.40015469418074, 37.78531678199267],
-  [-122.4124101516789, 37.80051001607987]
-];
 
 class Map extends React.Component {
   constructor(props) {
@@ -24,7 +17,12 @@ class Map extends React.Component {
         zoom: 8
       },
       loading: true,
-      markers: []
+      markers: [],
+      locations: [
+        { longitude: -122.39851786165565, latitude: 37.78531678199267 },
+        { longitude: -122.40015469418074, latitude: 37.80051001607987 },
+        { longitude: -122.4124101516789, latitude: 37.78736425435588 }
+      ]
     };
   }
 
@@ -66,8 +64,8 @@ class Map extends React.Component {
               <MarkerPin first={i === 0} />
             </Marker>
           ))}
-          <ScatterplotOverlay
-            locations={CITY_LOCATIONS}
+          <LineOverlay
+            locations={markers}
             dotRadius={10}
             globalOpacity={1}
             compositeOperation='lighter'
