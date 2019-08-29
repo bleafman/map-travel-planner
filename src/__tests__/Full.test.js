@@ -17,7 +17,7 @@ describe('Full component --->', () => {
     expect(queryByText('This is a test')).toBeInTheDocument();
   });
 
-  it('defaults to not applying justify-content-center', () => {
+  it('properly applys justify-content-center', () => {
     const withCenter = render(
       <Full center>
         <h1>This is a test</h1>
