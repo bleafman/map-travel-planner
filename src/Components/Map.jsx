@@ -51,7 +51,7 @@ class Map extends React.Component {
         >
           {markers.map((m, i) => (
             <Marker {...m} key={i}>
-              <MarkerPin />
+              <MarkerPin first={i === 0} />
             </Marker>
           ))}
         </ReactMapGL>
