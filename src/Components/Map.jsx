@@ -66,10 +66,7 @@ class Map extends React.Component {
           ))}
           <LineOverlay
             locations={markers}
-            dotRadius={10}
-            globalOpacity={1}
             compositeOperation='lighter'
-            dotFill='blue'
             renderWhileDragging={true}
           />
         </ReactMapGL>
