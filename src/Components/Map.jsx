@@ -41,9 +41,9 @@ export default function Map(props) {
           renderWhileDragging={true}
         />
       </ReactMapGL>
-      <button className='btn btn-secondary m-2' onClick={removeAllLocations}>
+      {/* <button className='btn btn-secondary m-2' onClick={removeAllLocations}>
         Remove Markers
-      </button>
+      </button> */}
     </div>
   );
 }

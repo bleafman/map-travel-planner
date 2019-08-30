@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PresetList() {
+export default function Itinerary() {
   return (
     <ul className='list-group'>
       <li className='list-group-item'>Cras justo odio</li>

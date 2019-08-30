@@ -20,8 +20,8 @@ export default function Split({ children }) {
   return (
     <div data-testid='split' className='split'>
       <div className='row'>
-        <div className='col-m-5'>{left}</div>
-        <div className='col-m-5 offset-md-2'>{right}</div>
+        <div className='col-m'>{left}</div>
+        <div className='col-m offset-md-2'>{right}</div>
       </div>
     </div>
   );

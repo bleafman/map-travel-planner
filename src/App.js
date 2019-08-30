@@ -5,6 +5,8 @@ import Container from './Components/Container';
 import Full from './Components/Full';
 import Split from './Components/Split';
 import Map from './Components/Map';
+import PresetList from './Components/PresetList';
+import Itinerary from './Components/Itinerary';
 
 // Styling
 import './App.css';
@@ -50,7 +52,7 @@ class App extends React.Component {
           </Full>
           {/* End of Title */}
           {/* Start of Map */}
-          <Full>
+          <Full center>
             <Map
               addLocation={this.addLocation}
               removeAllLocations={this.removeAllLocations}
@@ -58,17 +60,32 @@ class App extends React.Component {
             />
           </Full>
           {/* End of Map */}
+          <div className='m-4 ' />
           {/* Start of Controls*/}
           <Container>
             <Full>
               <Split>
-                <h3 className='text-center'>Preset Options</h3>
-                <h3 className='text-center'>Itinerary List</h3>
+                <div>
+                  <h3 className='text-center'>Preset Options</h3>
+                  <PresetList />
+                </div>
+                <div>
+                  <h3 className='text-center'>Itinerary </h3>
+                  <Itinerary />
+                </div>
               </Split>
             </Full>
           </Container>
           {/* End of Controls */}
         </Container>
+        {/* Start of DevTools */}
+        <button
+          className='btn btn-secondary m-2'
+          onClick={this.removeAllLocations}
+        >
+          Remove Markers
+        </button>
+        {/* End of DevTools */}
       </div>
     );
   }
