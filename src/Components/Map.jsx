@@ -10,32 +10,19 @@ class Map extends React.Component {
     super(props);
     this.state = {
       viewport: {
-        width: 400,
+        width: 800,
         height: 400,
         longitude: -122.39,
         latitude: 37.7128,
         zoom: 8
       },
-      loading: true,
-      markers: [],
-      locations: [
-        { longitude: -122.39851786165565, latitude: 37.78531678199267 },
-        { longitude: -122.40015469418074, latitude: 37.80051001607987 },
-        { longitude: -122.4124101516789, latitude: 37.78736425435588 }
-      ]
+      loading: true
     };
   }
 
   componentDidMount() {
     this.setState({ loading: false });
   }
-
-  addMarker = ({ lngLat: [longitude, latitude] }) => {
-    this.setState(state => {
-      const { markers } = state;
-      return { markers: [...markers, { longitude, latitude }] };
-    });
-  };
 
   handleViewportChange = viewport => {
     const { loading } = this.state;
@@ -44,33 +31,30 @@ class Map extends React.Component {
     }
   };
 
-  removeMarkers = () => {
-    this.setState({ markers: [] });
-  };
-
   render() {
-    const { viewport, markers } = this.state;
+    const { viewport } = this.state;
+    const { locations, addLocation, removeAllLocations } = this.props;
 
     return (
       <div data-testid='map'>
         <ReactMapGL
           {...viewport}
           onViewportChange={this.handleViewportChange}
-          onClick={this.addMarker}
+          onClick={addLocation}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         >
-          {markers.map((m, i) => (
+          {locations.map((m, i) => (
             <Marker {...m} key={i}>
               <MarkerPin first={i === 0} />
             </Marker>
           ))}
           <LineOverlay
-            locations={markers}
+            locations={locations}
             compositeOperation='lighter'
             renderWhileDragging={true}
           />
         </ReactMapGL>
-        <button className='btn btn-secondary m-2' onClick={this.removeMarkers}>
+        <button className='btn btn-secondary m-2' onClick={removeAllLocations}>
           Remove Markers
         </button>
       </div>
