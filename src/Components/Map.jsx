@@ -6,14 +6,14 @@ import MarkerPin from './MarkerPin';
 import LineOverlay from './LineOverlay';
 
 export default function Map(props) {
-  const { locations, addLocation, removeAllLocations } = props;
+  const { locations, addLocation } = props;
 
   const startingViewport = {
     width: 800,
     height: 400,
-    longitude: -122.39,
-    latitude: 37.7128,
-    zoom: 8
+    longitude: -7.786320276331708,
+    latitude: 53.33108467771086,
+    zoom: 5
   };
 
   const [viewport, setViewport] = useState(startingViewport);

@@ -1,14 +1,21 @@
 import React from 'react';
+import ListItem from './ListItem';
+
 import presetLocations from '../presetLocations';
+import { parseFeature } from '../utils';
 
 export default function PresetList() {
-  return (
-    <ul className='list-group'>
-      <li className='list-group-item'>Cras justo odio</li>
-      <li className='list-group-item'>Dapibus ac facilisis in</li>
-      <li className='list-group-item'>Morbi leo risus</li>
-      <li className='list-group-item'>Porta ac consectetur ac</li>
-      <li className='list-group-item'>Vestibulum at eros</li>
-    </ul>
-  );
+  //generate list
+
+  const listItems = presetLocations.map((geoJSONFeature, i) => {
+    const location = parseFeature(geoJSONFeature);
+
+    return (
+      <ListItem key={(location.latitude + location.longitude).toString()}>
+        {location.displayText}
+      </ListItem>
+    );
+  });
+
+  return <ul className='list-group'>{listItems}</ul>;
 }
