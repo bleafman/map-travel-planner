@@ -57,6 +57,7 @@ export default class LineOverlay extends PureComponent {
       }
 
       // return to origin
+
       animateRoute(locations[locations.length - 1], locations[0]);
     }
   };
