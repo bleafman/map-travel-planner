@@ -49,7 +49,7 @@ class Map extends React.Component {
   };
 
   render() {
-    const { viewport, markers, locations } = this.state;
+    const { viewport, markers } = this.state;
 
     return (
       <div data-testid='map'>

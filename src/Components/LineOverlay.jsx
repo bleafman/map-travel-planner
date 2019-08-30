@@ -39,34 +39,25 @@ export default class LineOverlay extends PureComponent {
     function animateRoute(lastLocation, nextLocation) {
       const start = project(lngLatAccessor(lastLocation));
       const end = project(lngLatAccessor(nextLocation));
+      ctx.beginPath();
       ctx.lineWidth = lineWidth;
       ctx.strokeStyle = color;
       ctx.moveTo(start[0], start[1]);
-      ctx.lineTo(end[0], end[0]);
+      ctx.lineTo(end[0], end[1]);
       ctx.stroke();
     }
 
     ctx.clearRect(0, 0, width, height);
     ctx.globalCompositeOperation = compositeOperation;
 
-    // if the user isn't actively moving the map and there are more than two locations draw
-    if ((renderWhileDragging || !isDragging) && locations.length > 2) {
-      // initalize path at origin location
-      const start = project(lngLatAccessor(locations[0]));
-      ctx.beginPath();
-      ctx.lineWidth = lineWidth;
-      ctx.strokeStyle = color;
-      ctx.moveTo(start[0], start[1]);
-
-      // iterate through all remaining locations
-      for (let i = 1; i < locations.length; i++) {
-        const pixel = project(lngLatAccessor(locations[i]));
-        ctx.lineTo(pixel[0], pixel[1]);
+    // if the user isn't actively moving the map and there are more than one locations draw
+    if ((renderWhileDragging || !isDragging) && locations.length > 1) {
+      for (let i = 0; i < locations.length - 1; i++) {
+        animateRoute(locations[i], locations[i + 1]);
       }
 
-      // return to origin and draw
-      ctx.lineTo(start[0], start[1]);
-      ctx.stroke();
+      // return to origin
+      animateRoute(locations[locations.length - 1], locations[0]);
     }
   };
   /* eslint-enable max-statements */
