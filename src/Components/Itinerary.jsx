@@ -1,13 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function Itinerary() {
+import ItineraryItem from './ItineraryItem';
+
+const propTypes = {
+  locations: PropTypes.instanceOf(Array).isRequired
+};
+
+export default function Itinerary({ locations }) {
+  // generate itinerary
+
+  const itineraryList = locations.map((location, i) => {
+    return (
+      <ItineraryItem
+        location={location}
+        key={location.coordinates.toString() + i}
+      >
+        {location.displayText}
+      </ItineraryItem>
+    );
+  });
+
   return (
     <ul className='list-group'>
-      <li className='list-group-item'>Cras justo odio</li>
-      <li className='list-group-item'>Dapibus ac facilisis in</li>
-      <li className='list-group-item'>Morbi leo risus</li>
-      <li className='list-group-item'>Porta ac consectetur ac</li>
-      <li className='list-group-item'>Vestibulum at eros</li>
+      {itineraryList.length === 0 ? (
+        <ItineraryItem>
+          Click a place on the map to start your trip!
+        </ItineraryItem>
+      ) : (
+        itineraryList
+      )}
     </ul>
   );
 }
+
+Itinerary.propTypes = propTypes;

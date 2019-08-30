@@ -1,23 +1,22 @@
 import React from 'react';
-import ListItem from './ListItem';
+import PresetListItem from './PresetListItem';
 
 import presetLocations from '../presetLocations';
 import { parseFeature } from '../utils';
 
 export default function PresetList({ addLocation }) {
-  //generate list
-
+  //generate list of items
   const listItems = presetLocations.map((geoJSONFeature, i) => {
     const location = parseFeature(geoJSONFeature);
 
     return (
-      <ListItem
+      <PresetListItem
         location={location}
         key={location.coordinates.toString()}
         addLocation={addLocation}
       >
         {location.displayText}
-      </ListItem>
+      </PresetListItem>
     );
   });
 

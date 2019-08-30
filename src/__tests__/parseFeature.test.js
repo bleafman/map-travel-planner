@@ -41,6 +41,6 @@ describe('parseFeature --->', () => {
   });
 
   it('Parses displayText', () => {
-    expect(result.displayText).toEqual('Artramon, Ireland');
+    expect(result.displayText).toEqual('Artramon, Wexford County, Ireland');
   });
 });

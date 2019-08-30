@@ -81,7 +81,7 @@ class App extends React.Component {
                 </div>
                 <div>
                   <h3 className='text-center'>Itinerary </h3>
-                  <Itinerary />
+                  <Itinerary locations={locations} />
                 </div>
               </Split>
             </Full>

@@ -17,10 +17,6 @@ export default function Map(props) {
 
   const [viewport, setViewport] = useState(startingViewport);
 
-  // useEffect(() => {
-  //   setViewport(startingViewport);
-  // }, [startingViewport]);
-
   const handleViewportChange = viewport => {
     setViewport({ ...viewport });
   };
