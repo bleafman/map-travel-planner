@@ -68,6 +68,5 @@ export default class LineOverlay extends PureComponent {
   }
 }
 
-LineOverlay.displayName = 'LineOverlay';
 LineOverlay.propTypes = propTypes;
 LineOverlay.defaultProps = defaultProps;

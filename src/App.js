@@ -3,6 +3,7 @@ import React from 'react';
 // Custom Components
 import Container from './Components/Container';
 import Full from './Components/Full';
+import Split from './Components/Split';
 import Map from './Components/Map';
 
 // Styling
@@ -40,12 +41,15 @@ class App extends React.Component {
     return (
       <div data-testid='app'>
         <Container>
+          {/* Start of Title */}
           <Full center>
             <Full>
-              <h1>Mapper</h1>
+              <h1 className='text-center'>Mapper</h1>
             </Full>
-            <p>A map-based travel planner</p>
+            <p className='text-center'>A map-based travel planner</p>
           </Full>
+          {/* End of Title */}
+          {/* Start of Map */}
           <Full>
             <Map
               addLocation={this.addLocation}
@@ -53,6 +57,17 @@ class App extends React.Component {
               locations={locations}
             />
           </Full>
+          {/* End of Map */}
+          {/* Start of Controls*/}
+          <Container>
+            <Full>
+              <Split>
+                <h3 className='text-center'>Preset Options</h3>
+                <h3 className='text-center'>Itinerary List</h3>
+              </Split>
+            </Full>
+          </Container>
+          {/* End of Controls */}
         </Container>
       </div>
     );
