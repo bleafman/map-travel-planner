@@ -8,6 +8,9 @@ import Map from './Components/Map';
 import PresetList from './Components/PresetList';
 import Itinerary from './Components/Itinerary';
 
+// Utilities
+import { geocodeToLocation } from './utils';
+
 // Styling
 import './App.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -27,10 +30,16 @@ class App extends React.Component {
     this.removeAllLocations = this.removeAllLocations.bind(this);
   }
 
-  addLocation = ({ lngLat: [longitude, latitude] }) => {
+  addLocation = async ({ lngLat: [longitude, latitude] }) => {
+    let location = { longitude, latitude };
+
+    try {
+      location = await geocodeToLocation(longitude, latitude);
+    } catch (error) {}
+
     this.setState(state => {
       const { locations } = state;
-      return { locations: [...locations, { longitude, latitude }] };
+      return { locations: [...locations, location] };
     });
   };
 
