@@ -73,7 +73,7 @@ export function parseFeature(geoJSONFeature) {
 
   // display text logic
   result.displayText = text;
-  if (region && !region === text) {
+  if (region && region !== text) {
     result.displayText = `${result.displayText}, ${region}`;
   }
   if (country) {
