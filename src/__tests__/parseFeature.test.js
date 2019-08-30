@@ -34,8 +34,10 @@ describe('parseFeature --->', () => {
   const result = parseFeature(testFeature);
 
   it('Parses latitude and longitute', () => {
-    expect(result.latitude).toBeCloseTo(-6.486053, 5);
-    expect(result.longitude).toBeCloseTo(52.392809, 5);
+    expect(result.coordinates[0]).toBeCloseTo(-6.486053, 5);
+    expect(result.longitude).toBeCloseTo(-6.486053, 5);
+    expect(result.coordinates[1]).toBeCloseTo(52.392809, 5);
+    expect(result.latitude).toBeCloseTo(52.392809, 5);
   });
 
   it('Parses displayText', () => {

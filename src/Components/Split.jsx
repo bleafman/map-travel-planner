@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const propTypes = {
   children: arrayOfLength.bind(null, 2)

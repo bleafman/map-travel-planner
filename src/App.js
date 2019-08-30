@@ -10,6 +10,7 @@ import Itinerary from './Components/Itinerary';
 
 // Styling
 import './App.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -67,7 +68,7 @@ class App extends React.Component {
               <Split>
                 <div>
                   <h3 className='text-center'>Preset Options</h3>
-                  <PresetList />
+                  <PresetList addLocation={this.addLocation} />
                 </div>
                 <div>
                   <h3 className='text-center'>Itinerary </h3>

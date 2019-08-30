@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
-
 import MarkerPin from './MarkerPin';
 
 import LineOverlay from './LineOverlay';
@@ -9,14 +8,18 @@ export default function Map(props) {
   const { locations, addLocation } = props;
 
   const startingViewport = {
-    width: 800,
-    height: 400,
-    longitude: -7.786320276331708,
-    latitude: 53.33108467771086,
-    zoom: 5
+    width: '70vw',
+    height: '70vh',
+    longitude: -7.0700551111549474,
+    latitude: 53.14549314531982,
+    zoom: 6.002436467267413
   };
 
   const [viewport, setViewport] = useState(startingViewport);
+
+  // useEffect(() => {
+  //   setViewport(startingViewport);
+  // }, [startingViewport]);
 
   const handleViewportChange = viewport => {
     setViewport({ ...viewport });
@@ -29,6 +32,7 @@ export default function Map(props) {
         onViewportChange={handleViewportChange}
         onClick={addLocation}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        mapStyle={'mapbox://styles/mapbox/streets-v9'}
       >
         {locations.map((m, i) => (
           <Marker {...m} key={i}>
