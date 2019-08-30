@@ -1,4 +1,5 @@
 import React from 'react';
+import presetLocations from '../presetLocations';
 
 export default function PresetList() {
   return (
