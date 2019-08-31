@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
+import sizeMe from 'react-sizeme';
 
 import MarkerPin from './MarkerPin';
 import LineOverlay from './LineOverlay';
@@ -68,4 +69,6 @@ function Map({ locations, addLocation, size }) {
   );
 }
 
-export default Map;
+export default sizeMe({
+  monitorHeight: true
+})(Map);

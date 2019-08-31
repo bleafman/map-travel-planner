@@ -7,7 +7,7 @@ import Split from './Components/Split';
 import Map from './Components/Map';
 import PresetList from './Components/PresetList';
 import Itinerary from './Components/Itinerary';
-import MapWrapper from './Components/MapWrapper';
+import ItineraryTitle from './Components/ItineraryHeader';
 
 // Utilities
 import { geocodeToLocation } from './utils';
@@ -61,42 +61,22 @@ class App extends React.Component {
             </Full>
             <p className='text-center'>A map-based travel planner</p>
           </Full>
-          {/* End of Title */}
-          {/* Start of Map */}
-          {/* <Full center>
-            <Map
-              addLocation={this.addLocation}
-              removeAllLocations={this.removeAllLocations}
-              locations={locations}
-            />
-          </Full> */}
-          {/* End of Map */}
-          {/* Start of Controls*/}
           <Full>
             <Split>
+              <Map
+                addLocation={this.addLocation}
+                removeAllLocations={this.removeAllLocations}
+                locations={locations}
+              />
               <div>
-                <MapWrapper
-                  addLocation={this.addLocation}
-                  removeAllLocations={this.removeAllLocations}
+                <Itinerary
                   locations={locations}
+                  removeAllLocations={this.removeAllLocations}
                 />
-              </div>
-              <div>
-                <h5 className='text-center'>Itinerary</h5>
-                <Itinerary locations={locations} />
               </div>
             </Split>
           </Full>
-          {/* End of Controls */}
         </Container>
-        {/* Start of DevTools */}
-        <button
-          className='btn btn-secondary m-2'
-          onClick={this.removeAllLocations}
-        >
-          Remove Markers
-        </button>
-        {/* End of DevTools */}
       </div>
     );
   }
