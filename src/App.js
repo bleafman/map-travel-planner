@@ -5,9 +5,8 @@ import Container from './Components/Container';
 import Full from './Components/Full';
 import Split from './Components/Split';
 import Map from './Components/Map';
-import PresetList from './Components/PresetList';
 import Itinerary from './Components/Itinerary';
-import ItineraryTitle from './Components/ItineraryHeader';
+import Header from './Components/Header';
 
 // Utilities
 import { geocodeToLocation } from './utils';
@@ -20,7 +19,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      presets: [
+      popular: [
         { longitude: -122.39851786165565, latitude: 37.78531678199267 },
         { longitude: -122.40015469418074, latitude: 37.80051001607987 },
         { longitude: -122.4124101516789, latitude: 37.78736425435588 }
@@ -28,6 +27,7 @@ class App extends React.Component {
       locations: []
     };
     this.addLocation = this.addLocation.bind(this);
+    this.removeLocation = this.removeLocation.bind(this);
     this.removeAllLocations = this.removeAllLocations.bind(this);
   }
 
@@ -48,18 +48,22 @@ class App extends React.Component {
     this.setState({ locations: [] });
   };
 
+  removeLocation = index => {
+    this.setState(state => {
+      const { locations } = state;
+      locations.splice(index, 1);
+      return { locations };
+    });
+  };
+
   render() {
     const { locations } = this.state;
 
     return (
       <div data-testid='app'>
         <Container>
-          {/* Start of Title */}
           <Full center>
-            <Full>
-              <h1 className='text-center'>Mapper</h1>
-            </Full>
-            <p className='text-center'>A map-based travel planner</p>
+            <Header />
           </Full>
           <Full>
             <Split>
@@ -71,6 +75,7 @@ class App extends React.Component {
               <div>
                 <Itinerary
                   locations={locations}
+                  removeLocation={this.removeLocation}
                   removeAllLocations={this.removeAllLocations}
                 />
               </div>
