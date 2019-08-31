@@ -1,81 +1,95 @@
-import React from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import React, { useState, useEffect } from 'react';
+import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
+import PropTypes from 'prop-types';
+import sizeMe from 'react-sizeme';
 
 import MarkerPin from './MarkerPin';
-
 import LineOverlay from './LineOverlay';
 
-class Map extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewport: {
-        width: 400,
-        height: 400,
-        longitude: -122.39,
-        latitude: 37.7128,
-        zoom: 8
-      },
-      loading: true,
-      markers: [],
-      locations: [
-        { longitude: -122.39851786165565, latitude: 37.78531678199267 },
-        { longitude: -122.40015469418074, latitude: 37.80051001607987 },
-        { longitude: -122.4124101516789, latitude: 37.78736425435588 }
-      ]
-    };
-  }
+const propTypes = {
+  locations: PropTypes.instanceOf(Array).isRequired,
+  addLocation: PropTypes.func.isRequired,
+  size: PropTypes.instanceOf(Object).isRequired
+};
 
-  componentDidMount() {
-    this.setState({ loading: false });
-  }
-
-  addMarker = ({ lngLat: [longitude, latitude] }) => {
-    this.setState(state => {
-      const { markers } = state;
-      return { markers: [...markers, { longitude, latitude }] };
-    });
+function Map({ locations, addLocation, size }) {
+  const startingViewport = {
+    longitude: -7.0700551111549474,
+    latitude: 53.14549314531982,
+    zoom: 6.002436467267413
   };
 
-  handleViewportChange = viewport => {
-    const { loading } = this.state;
-    if (!loading) {
-      this.setState({ viewport });
+  const navStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    padding: '10px'
+  };
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  const [width, setWidth] = useState(size.width);
+  useEffect(() => {
+    setWidth(size.width);
+  }, [size.width]);
+
+  /* Height is getting updated to width pixels. 
+   The underlying canvas lags actual media change,
+   making it slow to rerender. A little wonky but 
+   works without slow responsiveness.
+  */
+
+  const [height, setHeight] = useState(size.width);
+  useEffect(() => {
+    setHeight(size.width);
+  }, [size.width]);
+
+  const [viewport, setViewport] = useState(startingViewport);
+
+  const handleViewportChange = viewport => {
+    if (loading) {
+      return;
     }
+    let { width, height, ...rest } = viewport;
+    setWidth(size.width);
+    setHeight(size.height);
+    setViewport({ ...rest });
   };
 
-  removeMarkers = () => {
-    this.setState({ markers: [] });
-  };
-
-  render() {
-    const { viewport, markers } = this.state;
-
-    return (
-      <div data-testid='map'>
-        <ReactMapGL
-          {...viewport}
-          onViewportChange={this.handleViewportChange}
-          onClick={this.addMarker}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        >
-          {markers.map((m, i) => (
-            <Marker {...m} key={i}>
-              <MarkerPin first={i === 0} />
-            </Marker>
-          ))}
-          <LineOverlay
-            locations={markers}
-            compositeOperation='lighter'
-            renderWhileDragging={true}
-          />
-        </ReactMapGL>
-        <button className='btn btn-secondary m-2' onClick={this.removeMarkers}>
-          Remove Markers
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div data-testid='map'>
+      <ReactMapGL
+        {...viewport}
+        width={width}
+        height={height}
+        onViewportChange={handleViewportChange}
+        onClick={addLocation}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        mapStyle={'mapbox://styles/mapbox/streets-v9'}
+      >
+        {locations.map((m, i) => (
+          <Marker {...m} key={i}>
+            <MarkerPin first={i === 0} />
+          </Marker>
+        ))}
+        <LineOverlay
+          locations={locations}
+          compositeOperation='lighter'
+          renderWhileDragging={true}
+        />
+        <div className='nav' style={navStyle}>
+          <NavigationControl />
+        </div>
+      </ReactMapGL>
+    </div>
+  );
 }
 
-export default Map;
+Map.propTypes = propTypes;
+
+export default sizeMe({
+  monitorHeight: true
+})(Map);

@@ -9,3 +9,5 @@ jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
   })),
   NavigationControl: jest.fn()
 }));
+
+jest.mock('@mapbox/mapbox-sdk/services/geocoding');

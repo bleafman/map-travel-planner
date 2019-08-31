@@ -14,7 +14,7 @@ jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
 
 describe('Map component --->', () => {
   it('renders without crashing', () => {
-    const { container, getByTestId } = render(<Map />);
+    const { getByTestId } = render(<Map locations={[]} />);
     expect(getByTestId('map')).toBeInTheDocument();
   });
 });

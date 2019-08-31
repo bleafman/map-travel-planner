@@ -8,7 +8,7 @@ describe('Container component --->', () => {
     expect(queryByTestId('container')).toBeInTheDocument();
   });
 
-  it('renders children elements', () => {
+  it('renders children elements without error', () => {
     const { queryByText } = render(
       <Container>
         <h1>This is a test</h1>
