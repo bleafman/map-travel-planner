@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/Split.css';
-import { SizeMe } from 'react-sizeme';
 
 const propTypes = {
   children: arrayOfLength.bind(null, 2)
@@ -21,7 +20,7 @@ export default function Split({ children }) {
   return (
     <div data-testid='split' className='split'>
       <div className='row d-flex'>
-        <div className='col-sm-8 order-sm-2 bg-primary'>{left}</div>
+        <div className='col-sm-8 order-sm-2'>{left}</div>
         <div className='col-sm-4 flex-fill'>{right}</div>
       </div>
     </div>

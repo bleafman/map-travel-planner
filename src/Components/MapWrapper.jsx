@@ -6,7 +6,6 @@ export default function MapWrapper({ locations, addLocation }) {
   return (
     <SizeMe monitorHeight>
       {({ size }) => {
-        console.log('Wrapper size is:', size);
         return (
           <Map locations={locations} addLocation={addLocation} size={size} />
         );
