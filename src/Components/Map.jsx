@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import MarkerPin from './MarkerPin';
 
@@ -8,8 +8,8 @@ export default function Map(props) {
   const { locations, addLocation } = props;
 
   const startingViewport = {
-    width: '70vw',
-    height: '70vh',
+    width: '40vw',
+    height: '60vh',
     longitude: -7.0700551111549474,
     latitude: 53.14549314531982,
     zoom: 6.002436467267413

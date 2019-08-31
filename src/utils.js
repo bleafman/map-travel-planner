@@ -23,11 +23,20 @@ export async function geocodeToLocation(longitude, latitude) {
       .send();
 
     if (response.body.features.length === 0) {
-      throw new Error('No place result for coordinates');
+      throw new Error('No place result for coordinates:', [
+        longitude,
+        latitude
+      ]);
     }
   } catch (error) {
     console.error('Error fetching reverse geocoding:', error);
-    return;
+    const unknownLocationText = 'Unknown location';
+    return (result = {
+      longitude,
+      latitude,
+      coordinates: [longitude, latitude],
+      displayText: unknownLocationText
+    });
   }
 
   result = parseFeature(response.body.features[0]);

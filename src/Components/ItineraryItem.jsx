@@ -8,7 +8,6 @@ export default function itneraryItem({ children, location }) {
     'bg-light': true,
     'text-info': true,
     'mb-1': true
-    // disabled: clicked
   });
 
   return (
