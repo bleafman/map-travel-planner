@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
+import PropTypes from 'prop-types';
 import sizeMe from 'react-sizeme';
 
 import MarkerPin from './MarkerPin';
 import LineOverlay from './LineOverlay';
+
+const propTypes = {
+  locations: PropTypes.instanceOf(Array).isRequired,
+  addLocation: PropTypes.func.isRequired,
+  size: PropTypes.instanceOf(Object).isRequired
+};
 
 function Map({ locations, addLocation, size }) {
   const startingViewport = {
     longitude: -7.0700551111549474,
     latitude: 53.14549314531982,
     zoom: 6.002436467267413
+  };
+
+  const navStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    padding: '10px'
   };
 
   const [loading, setLoading] = useState(true);
@@ -22,9 +36,11 @@ function Map({ locations, addLocation, size }) {
     setWidth(size.width);
   }, [size.width]);
 
-  // Spent a lot of time trying to figure out responsiveness
-  // This is works for rapid responsiveness
-  // updating from onViewportChange lags
+  /* Height is getting updated to width pixels. 
+   The underlying canvas lags actual media change,
+   making it slow to rerender. A little wonky but 
+   works without slow responsiveness.
+  */
 
   const [height, setHeight] = useState(size.width);
   useEffect(() => {
@@ -64,10 +80,15 @@ function Map({ locations, addLocation, size }) {
           compositeOperation='lighter'
           renderWhileDragging={true}
         />
+        <div className='nav' style={navStyle}>
+          <NavigationControl />
+        </div>
       </ReactMapGL>
     </div>
   );
 }
+
+Map.propTypes = propTypes;
 
 export default sizeMe({
   monitorHeight: true
