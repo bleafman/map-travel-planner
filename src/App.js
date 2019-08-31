@@ -7,6 +7,7 @@ import Split from './Components/Split';
 import Map from './Components/Map';
 import PresetList from './Components/PresetList';
 import Itinerary from './Components/Itinerary';
+import MapWrapper from './Components/MapWrapper';
 
 // Utilities
 import { geocodeToLocation } from './utils';
@@ -73,8 +74,8 @@ class App extends React.Component {
           {/* Start of Controls*/}
           <Full>
             <Split>
-              <div className='justify-content-center'>
-                <Map
+              <div>
+                <MapWrapper
                   addLocation={this.addLocation}
                   removeAllLocations={this.removeAllLocations}
                   locations={locations}
