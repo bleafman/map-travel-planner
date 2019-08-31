@@ -4,7 +4,7 @@
 
 Mapper is a map-based travel planner.
 
-<img src="mapper-gif.gif" width='300'/>
+<img src="mapper-gif.gif" width='100%'/>
 
 ### How To Use / Requirements
 
